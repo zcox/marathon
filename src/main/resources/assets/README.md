@@ -29,7 +29,6 @@ easy editing, set the `assets_path` flag when running Marathon:
 
 1. Add the following to your Sublime Text User Settings
 
-[javascript]:
 		{
 			...
 			"rulers": [80], // lines no longer than 80 chars
