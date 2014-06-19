@@ -11,6 +11,9 @@ shopt -s expand_aliases
 # Find locally installed NPM binaries
 alias npmexec='PATH=$(npm bin):$PATH'
 
+# Pre build hook
+find . -name "*.jsx" -print0 | xargs -0 jsxhint
+
 # Remove previous build, start fresh
 rm -rf $DIST_DIR
 
@@ -34,3 +37,6 @@ rm -rf $BUILD_DIR
 
 # Remove all compiled files but the desired `main.js`
 find $DIST_DIR -not -name 'main.js' -not -name 'dist' | xargs rm -rf
+
+# Post build hook
+jshint $DIST_DIR/main.js
