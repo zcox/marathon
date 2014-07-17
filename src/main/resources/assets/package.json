@@ -4,7 +4,11 @@
   "description": "Static assets for Mesosphere's Marathon.",
   "main": "js/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "grunt jshint",
+    "dev": "grunt dev",
+    "dist": "grunt dist",
+    "watch": "grunt watch"
   },
   "keywords": [
     "marathon",
@@ -12,6 +16,11 @@
   ],
   "dependencies": {},
   "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-nodeunit": "~0.4.1",
+    "grunt-contrib-uglify": "~0.5.0",
+
     "envify": "^1.2.1",
     "requirejs": "^2.1.11",
     "react-tools": "^0.11.1",
