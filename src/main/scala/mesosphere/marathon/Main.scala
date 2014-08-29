@@ -14,6 +14,7 @@ import com.twitter.common.zookeeper.ZooKeeperClient
 import scala.collection.JavaConverters._
 import java.util.Properties
 import org.apache.log4j.Logger
+import scala.util.{ Try, Success }
 
 object Main extends App {
   val log = Logger.getLogger(getClass.getName)
@@ -68,9 +69,15 @@ object Main extends App {
           "notification")
         Some(new HttpEventModule())
 
-      case _ =>
-        log.info("Event notification disabled.")
-        None
+      case other =>
+        Try(Class.forName(other)).map(_.newInstance).filter(_.isInstanceOf[AbstractModule]).map(_.asInstanceOf[AbstractModule]) match {
+          case Success(module) =>
+            log.info(s"Using ${module.getClass.getSimpleName} for event notification")
+            Some(module)
+          case _ =>
+            log.info(s"'$other' is an unknown event subscriber type, event notification disabled")
+            None
+        }
     }
   }
 
