@@ -68,6 +68,10 @@ object Main extends App {
           "notification")
         Some(new HttpEventModule())
 
+      case "logging" =>
+        log.info("Using LoggingEventSubscriber for event notification")
+        Some(new mesosphere.marathon.event.logging.LoggingEventModule())
+
       case _ =>
         log.info("Event notification disabled.")
         None
